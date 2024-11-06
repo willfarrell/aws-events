@@ -1,0 +1,390 @@
+{
+  "$id": "https://schema.aws/defs",
+  "title": "AWS Lambda Events",
+  "description": "https://docs.aws.amazon.com/lambda/latest/dg/lambda-services.html / https://github.com/michaelbrewer/aws-lambda-events/tree/main/docs/events",
+  "$defs": {
+    "accountId": {
+      "type": "string",
+      "pattern": "^[0-9]*$",
+      "minLength": 12,
+      "maxLength": 12
+    },
+    "service": {
+      "title": "AWS Service Code",
+      "description": "TODO write bot to fetch all",
+      "$comment": "https://docs.aws.amazon.com/general/latest/gr/aws-service-information.html",
+      "type": "string",
+      "enum": [
+        "amplify",
+        "apigateway",
+        "appconfig",
+        "appfabric",
+        "appmesh",
+        "apprunner",
+        "appflow",
+        "application-autoscaling",
+        "discovery",
+        "mgn",
+        "appstream2",
+        "appsync",
+        "apptest",
+        "athena",
+        "auditmanager",
+        "a2i-runtime.sagemaker",
+        "rds",
+        "autoscaling-plans",
+        "b2bi",
+        "backup",
+        "batch",
+        "bedrock",
+        "ce",
+        "cur",
+        "budgets",
+        "api.pricing",
+        "savingsplans",
+        "billingconductor",
+        "braket",
+        "bugbust",
+        "acm",
+        "chatbot",
+        "identity-chime",
+        "media-pipelines-chime",
+        "messaging-chime",
+        "voice-chime",
+        "meetings-chime",
+        "service.chime",
+        "cleanrooms"
+      ]
+    },
+    "region": {
+      "title": "AWS Region Code",
+      "description": "",
+      "$comment": "https://docs.aws.amazon.com/general/latest/gr/rande.html#aws_region_endpoints",
+      "type": "string",
+      "enum": [
+        "us-east-2",
+        "us-east-1",
+        "us-west-1",
+        "us-west-2",
+        "af-south-1",
+        "ap-east-1",
+        "ap-south-2",
+        "ap-southeast-3",
+        "ap-southeast-5",
+        "ap-southeast-4",
+        "ap-south-1",
+        "ap-northeast-3",
+        "ap-northeast-2",
+        "ap-southeast-1",
+        "ap-southeast-2",
+        "ap-northeast-1",
+        "ca-central-1",
+        "ca-west-1",
+        "eu-central-1",
+        "eu-west-1",
+        "eu-west-2",
+        "eu-south-1",
+        "eu-west-3",
+        "eu-south-2",
+        "eu-north-1",
+        "eu-central-2",
+        "il-central-1",
+        "me-south-1",
+        "me-central-1",
+        "sa-east-1",
+        "us-gov-east-1",
+        "us-gov-west-1"
+      ]
+    },
+    "arn": {
+      "type": "string",
+      "$comment": "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html",
+      "pattern": "^arn:aws:(?<service>[a-z]+):(?<region>(us|af|ap|ca|eu|il|me|sa)-(gov-)?(central|north|northeast|east|southeast|south|west)-[0-5]):(?<accountId>[0-9]{12}):(?<resourceType>[a-zA-Z0-9/]+[/:]?)(?<resourceId>[a-zA-Z0-9/]+)$",
+      "minLength": 32,
+      "maxLength": 512
+    },
+    "requestId": {
+      "$ref": "https://schema.aws/defs#/$defs/stringAWSBase64",
+      "type": "string",
+      "pattern": "^[0-9a-zA-Z_-]*=*$",
+      "minLength": 16,
+      "maxLength": 16
+    },
+    "httpProtocol": {
+      "type": "string",
+      "enum": ["HTTP/1.0", "HTTP/1.1", "HTTP/2.0", "HTTP/3.0"]
+    },
+    "httpMethod": {
+      "title": "HTTP Request Methods",
+      "description": "TODO QUERY coming in the future",
+      "$comment": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods",
+      "type": "string",
+      "enum": [
+        "HEAD",
+        "OPTIONS",
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE",
+        "CONNECT",
+        "TRACE"
+      ]
+    },
+    "httpIP": {
+      "oneOf": [{ "$ref": "#/$defs/httpIPv4" }, { "$ref": "#/$defs/httpIPv6" }]
+    },
+    "httpIPv4": {
+      "type": "string",
+      "format": "ipv4",
+      "minLength": 7,
+      "maxLength": 15
+    },
+    "httpIPv6": {
+      "type": "string",
+      "format": "ipv6",
+      "minLength": 15,
+      "maxLength": 39
+    },
+    "httpHostname": {
+      "type": "string",
+      "pattern": "^[\\p{L}\\p{N}\\._-]{2,256}\\.[a-z]{2,6}$",
+      "maxLength": 256
+    },
+    "httpOrigin": {
+      "type": "string",
+      "pattern": "^https://^[\\p{L}\\p{N}\\._-]{2,256}\\.[a-z]{2,6}$",
+      "maxLength": 256
+    },
+    "httpPath": {
+      "type": "string",
+      "pattern": "^/[a-zA-Z0-9%/\\._-]*$",
+      "maxLength": 256
+    },
+    "httpQueryString": {
+      "description": "https://www.ietf.org/rfc/rfc2396.txt Allow reserved, unreserved chars, and %",
+      "type": "string",
+      "pattern": "^[-()A-Za-z0-9_\\.!~*';/:@&=+$,=%]*$",
+      "maxLength": 8192
+    },
+    "httpCookie": {
+      "$comment": "OWASP ASVS 5.0: 5.1.6",
+      "type": "string",
+      "pattern": "^[_a-zA-z0-9]+=[a-zA-Z0-9=-]+$",
+      "maxLength": 4096
+    },
+    "httpHeader": {
+      "$comment": "OWASP ASVS 5.0: 5.1.8",
+      "type": "string",
+      "pattern": "^[\\p{L}\\p{N}\\p{P} ]*$",
+      "maxLength": 4096
+    },
+    "httpHeaders": {
+      "type": "object",
+      "unevaluatedProperties": false,
+      "properties": {
+        "accept": {
+          "description": "application/json, text/plain, */*",
+          "type": "string",
+          "pattern": "^[a-z/*+\\., ]*$",
+          "maxLength": 256
+        },
+        "accept-language": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9\\.;,= ]*$",
+          "maxLength": 256
+        },
+        "authorization": {
+          "type": "string",
+          "pattern": "^(Bearer|[a-zA-Z0-9-]+) [a-zA-Z0-9+/=]*$",
+          "maxLength": 256
+        },
+        "cache-control": {
+          "type": "string",
+          "pattern": "^[a-z0-9=, -]*$",
+          "maxLength": 256
+        },
+        "cloudfront-is-mobile-viewer": {
+          "$ref": "#/$defs/stringBoolean"
+        },
+        "cloudfront-is-smarttv-viewer": {
+          "$ref": "#/$defs/stringBoolean"
+        },
+        "cloudfront-is-tablet-viewer": {
+          "$ref": "#/$defs/stringBoolean"
+        },
+        "cloudfront-viewer-city": { "$ref": "#/$defs/httpHeader" },
+        "cloudfront-viewer-country-name": {
+          "$ref": "#/$defs/httpHeader"
+        },
+        "cloudfront-viewer-country-region-name": {
+          "$ref": "#/$defs/httpHeader"
+        },
+        "content-length": { "$ref": "#/$defs/stringInteger" },
+
+        "host": { "$ref": "#/$defs/httpHostname" },
+        "origin": { "$ref": "#/$defs/httpOrigin" },
+        "pragma": { "$ref": "#/$defs/httpHeader" },
+        "sec-ch-ua": {
+          "$ref": "#/$defs/httpHeaders/properties/user-agent"
+        },
+        "sec-ch-ua-platform": { "$ref": "#/$defs/httpHeader" },
+        "user-agent": { "$ref": "#/$defs/httpHeader" },
+        "via": {
+          "description": "3.0 [a-z0-9]{30}.cloudfront.net (CloudFront)",
+          "$ref": "#/$defs/httpHeader"
+        },
+        "x-amz-cf-id": {
+          "$ref": "#/$defs/stringAWSBase64",
+          "type": "string",
+          "pattern": "^[0-9a-zA-Z_-]+=*$",
+          "minLength": 56,
+          "maxLength": 56
+        },
+        "x-amzn-trace-id": {
+          "description": "Root=1-670686af-5a7b8b310c651aef57f5cba3",
+          "type": "string",
+          "pattern": "^Root=[0-9]{1}-[0-9a-f]{8}-[0-9a-f]{24}$",
+          "maxLength": 256
+        },
+        "x-forwarded-for": {
+          "description": "0000:aaa:ffff:0100:5555:dddd:6666:eee, 255.255.255.255",
+          "type": "string",
+          "pattern": "^[0-9.a-f:, ]*$",
+          "maxLength": 256
+        },
+        "x-forwarded-port": { "const": "443" },
+        "x-forwarded-proto": { "const": "https" }
+      },
+      "required": []
+    },
+    "httpStatusCode": {
+      "$comment": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Status",
+      "type": "integer",
+      "enum": [
+        100, 101, 102, 103, 200, 201, 202, 203, 204, 205, 206, 207, 208, 226,
+        300, 301, 302, 303, 304, 305, 306, 307, 308, 400, 401, 402, 403, 404,
+        405, 406, 407, 408, 409, 410, 411, 412, 413, 414, 415, 416, 417, 418,
+        421, 422, 423, 424, 425, 526, 428, 429, 431, 451, 500, 502, 503, 504,
+        505, 506, 507, 508, 511
+      ]
+    },
+    "s3Checksum": {
+      "description": "AWS S3 multipart upload chacksum {44char}-{up to 10_000}",
+      "type": "string",
+      "pattern": "^[0-9a-zA-Z+/]*=*(-[1-9]|-[1-9][0-9]{0,3}|-10000)?$",
+      "maxLength": 49
+    },
+    "s3UploadId": {
+      "$comment": "TODO lockdown pattern",
+      "type": "string",
+      "pattern": "^[0-9a-zA-Z]*$",
+      "maxLength": 172
+    },
+    "s3PartNumber": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 10000
+    },
+    "arrayOfString": {
+      "type": "array",
+      "unevaluatedItems": false,
+      "items": { "$ref": "#/$defs/string" },
+      "uniqueItems": false,
+      "minItems": 0,
+      "maxItems": 10
+    },
+    "integer": {
+      "type": "integer",
+      "minimum": -9007199254740991,
+      "maximum": 9007199254740991
+    },
+    "number": {
+      "type": "number",
+      "minimum": -9007199254740991,
+      "maximum": 9007199254740991
+    },
+    "integerPositive": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "timeEpochInSeconds": {
+      "type": "integer",
+      "minimum": 1700000000,
+      "maximum": 2900000000
+    },
+    "timeEpochInDecimalSeconds": {
+      "type": "number",
+      "minimum": 1700000000,
+      "maximum": 2900000000
+    },
+    "timeEpochInMiliseconds": {
+      "type": "integer",
+      "minimum": 1700000000000,
+      "maximum": 2900000000000
+    },
+    "objectOfStrings": {
+      "type": "object",
+      "unevaluatedProperties": false,
+      "patternProperties": {
+        "^[\\p{L}\\p{N}]+$": { "$ref": "#/$defs/string" }
+      },
+      "maxProperties": 256,
+      "required": []
+    },
+    "string": {
+      "type": "string",
+      "pattern": "^[\\p{L}\\p{N}\\p{P} ]*$",
+      "minLength": 0,
+      "maxLength": 256
+    },
+    "stringBoolean": {
+      "type": "string",
+      "enum": ["true", "false"]
+    },
+    "stringInteger": {
+      "type": "string",
+      "pattern": "^-?[0-9]+$",
+      "minLength": 1,
+      "maxLength": 16
+    },
+    "stringUUID": {
+      "type": "string",
+      "format": "uuid",
+      "minLength": 36,
+      "maxLength": 36
+    },
+    "stringISOTimestamp": {
+      "type": "string",
+      "format": "datetime",
+      "minLength": 24,
+      "maxLength": 28
+    },
+    "stringAWSTimestamp": {
+      "description": "09/Oct/2024:13:35:43 +0000",
+      "type": "string",
+      "pattern": "^[0-3][0-9]/[A-Z][a-z]{2}/2[01][2-9][0-9]:[0-2][0-9]:[0-5][0-9]:[0-9][0-9] [+-][0-9]{4}$",
+      "minLength": 26,
+      "maxLength": 26
+    },
+    "stringBase64": {
+      "type": "string",
+      "pattern": "^[0-9a-zA-Z+/]*=*$",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "stringAWSBase64": {
+      "type": "string",
+      "pattern": "^[0-9a-zA-Z_-]*=*$",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "stringSHA256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "minLength": 64,
+      "maxLength": 64
+    }
+  }
+}

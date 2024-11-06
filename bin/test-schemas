@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+function test {
+  schema=${1}
+  echo ${schema}
+
+  ajv validate ${schema} --valid --strict true \
+    -r ./\$defs.json \
+     | grep 'schema is invalid'
+
+
+  ajv sast ${schema} \
+    -r ./\$defs.json
+
+  node ./bin/test.mjs ${schema}
+}
+
+schema=./\$defs.json
+ajv validate ${schema} --valid \
+  --strict true --coerce-types array --all-errors true --use-defaults empty \
+   | grep 'schema is invalid'
+
+ajv sast ${schema}
+
+for file in events/*/*/schema.*.json; do
+  test $file #&
+done
+
+wait

@@ -1,0 +1,26 @@
+{
+  "name": "aws-events",
+  "version": "0.0.0",
+  "description": "Collection of JSON Schemas for AWS Lambda Events",
+  "main": "index.js",
+  "files": [
+    "$defs.json"
+  ],
+  "scripts": {
+    "test": "./bin/test-schemas"
+  },
+  "keywords": [
+    "AWS",
+    "Lambda",
+    "JSON",
+    "Schema",
+    "Middy",
+    "middyjs"
+  ],
+  "author": "willfarrell",
+  "license": "MIT",
+  "devDependencies": {
+    "ajv-cmd": "^0.7.0",
+    "json-schema-test-esm": "^3.0.0"
+  }
+}
