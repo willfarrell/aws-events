@@ -257,6 +257,39 @@
           "minLength": 56,
           "maxLength": 56
         },
+        "x-amz-content-sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]*$",
+          "minLength": 64,
+          "maxLength": 64
+        },
+        "x-amz-date": {
+          "type": "string",
+          "pattern": "^[0-9]*Z$",
+          "minLength": 16,
+          "maxLength": 16
+        },
+        "x-amz-security-token": {
+          "$ref": "#/$defs/stringAWSBase64",
+          "type": "string",
+          "pattern": "^[0-9a-zA-Z_-]+=*$",
+          "minLength": 764,
+          "maxLength": 764
+        },
+        "x-amz-source-account": {
+          "$ref": "#/$defs/accountId"
+        },
+        "x-amz-source-arn": {
+          "$ref": "#/$defs/arn"
+        },
+        "x-amz-tls-cipher-suite": {
+          "type": "string",
+          "enum": ["ECDHE-RSA-AES128-GCM-SHA256"]
+        },
+        "x-amz-tls-version": {
+          "type": "string",
+          "enum": ["TLSv1.2", "TLSv1.3"]
+        },
         "x-amzn-trace-id": {
           "description": "Root=1-670686af-5a7b8b310c651aef57f5cba3",
           "type": "string",
