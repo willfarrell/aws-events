@@ -19,12 +19,12 @@ const ajv = new Ajv({
 });
 
 const name = basename(schemaPath);
+const cwd = join(dirname(schemaPath), "./tests/");
+const test = "test." + name;
 jsonSchemaTest(ajv, {
   description: name,
-  suites: {
-    test: join(dirname(schemaPath), "./tests/", "test." + name),
-  },
-  cwd: import.meta.dirname,
+  suites: { test },
+  cwd,
   describe,
   assert,
 });
