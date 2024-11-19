@@ -244,7 +244,6 @@
           "$ref": "#/$defs/httpHeader"
         },
         "content-length": { "$ref": "#/$defs/stringInteger" },
-
         "host": { "$ref": "#/$defs/httpHostname" },
         "origin": { "$ref": "#/$defs/httpOrigin" },
         "pragma": { "$ref": "#/$defs/httpHeader" },
@@ -282,7 +281,7 @@
           "$comment": "#/$defs/stringAWSBase64",
           "type": "string",
           "pattern": "^[0-9a-zA-Z+/]+=*$",
-          "minLength": 764,
+          "minLength": 1,
           "maxLength": 764
         },
         "x-amz-source-account": {
@@ -337,7 +336,7 @@
     "authorizerIamUserId": {
       "description": "Used in Function URL authorizer.iam.userId",
       "type": "string",
-      "pattern": "^[0-9A-Z]*:EdgeCredentialsProxy\\+EdgeHostAuthenticationClient-[0-9A-Z]*-[0-9A-Z]*$",
+      "pattern": "^[0-9A-Z]*:(OriginAccessSession|EdgeCredentialsProxy\\+EdgeHostAuthenticationClient-[0-9A-Z]*-[0-9A-Z]*)$",
       "maxLength": 80
     },
     "s3Checksum": {
