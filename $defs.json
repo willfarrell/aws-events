@@ -282,7 +282,7 @@
           "type": "string",
           "pattern": "^[0-9a-zA-Z+/]+=*$",
           "minLength": 1,
-          "maxLength": 764
+          "maxLength": 1024
         },
         "x-amz-source-account": {
           "$ref": "#/$defs/accountId"
