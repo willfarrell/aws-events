@@ -318,6 +318,19 @@
         505, 506, 507, 508, 511
       ]
     },
+    "authorizerIamAccessKey": {
+      "description": "Used in Function URL authorizer.iam.accessKey",
+      "type": "string",
+      "pattern": "^[0-9A-Z]*$",
+      "minLength": 20,
+      "maxLength": 20
+    },
+    "authorizerIamUserId": {
+      "description": "Used in Function URL authorizer.iam.userId",
+      "type": "string",
+      "pattern": "^[0-9A-Z]*:EdgeCredentialsProxy\\+EdgeHostAuthenticationClient-[0-9A-Z]*-[0-9A-Z]*$",
+      "maxLength": 80
+    },
     "s3Checksum": {
       "description": "AWS S3 multipart upload chacksum {44char}-{up to 10_000}",
       "type": "string",
