@@ -252,6 +252,11 @@
           "$ref": "#/$defs/httpCookie"
         },
         "content-length": { "$ref": "#/$defs/stringInteger" },
+        "content-type": {
+          "type": "string",
+          "pattern": "^([*]|[a-z]+)/([*]|[a-z+\\._-]+)(; ?charset=[a-zA-Z0-9-]*)?$",
+          "maxLength": 32
+        },
         "host": { "$ref": "#/$defs/httpHostname" },
         "origin": { "$ref": "#/$defs/httpOrigin" },
         "pragma": { "$ref": "#/$defs/httpHeader" },
