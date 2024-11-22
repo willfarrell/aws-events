@@ -99,7 +99,7 @@
     "arn": {
       "type": "string",
       "$comment": "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html",
-      "pattern": "^arn:aws:(?<service>[a-z-]+):(?<region>(us|af|ap|ca|eu|il|me|sa)-(gov-)?(central|north|northeast|east|southeast|south|west)-[0-5])?:(?<accountId>[0-9]{12}):(?<resourceType>[a-zA-Z0-9/+-]+[/:]?)(?<resourceId>[a-zA-Z0-9/-]+)$",
+      "pattern": "^arn:aws:(?<service>[a-z0-9-]+):(?<region>(us|af|ap|ca|eu|il|me|sa)-(gov-)?(central|north|northeast|east|southeast|south|west)-[0-5])?:(?<accountId>[0-9]{12}):(?<resourceType>[a-zA-Z0-9/+-]+[/:]?)(?<resourceId>[a-zA-Z0-9/-]+)$",
       "minLength": 32,
       "maxLength": 512
     },
@@ -123,8 +123,8 @@
     },
     "userPrincipalId": {
       "type": "string",
-      "pattern": "^AWS:A[0-9A-Z]*$",
-      "maxLength": 25
+      "pattern": "^AWS:A[0-9A-Z]*(:[a-z0-9-])?$",
+      "maxLength": 64
     },
     "ownerPrincipalId": {
       "type": "string",
