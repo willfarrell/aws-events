@@ -359,9 +359,8 @@
       "maxLength": 49
     },
     "s3UploadId": {
-      "$comment": "TODO lockdown pattern",
       "type": "string",
-      "pattern": "^[0-9a-zA-Z]*$",
+      "pattern": "^[0-9a-zA-Z\\._-]*$",
       "maxLength": 172
     },
     "s3PartNumber": {
