@@ -259,9 +259,9 @@
         },
         "host": { "$ref": "#/$defs/httpHostname" },
         "if-none-match": {
-          "type":"string",
-          "pattern":"^([*]|(?:\"[a-zA-Z0-9]*\",? ?)*)$",
-          "maxLength":
+          "type": "string",
+          "pattern": "^([*]|(?:\"[a-zA-Z0-9]*\",? ?)*)$",
+          "maxLength": 32
         },
         "origin": { "$ref": "#/$defs/httpOrigin" },
         "pragma": { "$ref": "#/$defs/httpHeader" },
