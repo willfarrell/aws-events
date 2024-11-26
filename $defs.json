@@ -176,7 +176,7 @@
     },
     "httpOrigin": {
       "type": "string",
-      "pattern": "^https://(^[\\p{L}\\p{N}\\._-]{2,256}\\.[a-z]{2,6}|localhost)(:[0-9]+)?$",
+      "pattern": "^https://([\\p{L}\\p{N}\\._-]{2,256}\\.[a-z]{2,6}|localhost)(:[0-9]+)?$",
       "maxLength": 256
     },
     "httpPath": {
