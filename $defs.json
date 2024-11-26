@@ -258,6 +258,11 @@
           "maxLength": 32
         },
         "host": { "$ref": "#/$defs/httpHostname" },
+        "if-none-match": {
+          "type":"string",
+          "pattern":"^([*]|(?:\"[a-zA-Z0-9]*\",? ?)*)$",
+          "maxLength":
+        },
         "origin": { "$ref": "#/$defs/httpOrigin" },
         "pragma": { "$ref": "#/$defs/httpHeader" },
         "sec-ch-ua": {
