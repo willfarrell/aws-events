@@ -267,7 +267,7 @@
         "pragma": { "$ref": "#/$defs/httpHeader" },
         "sec-ch-ua": {
           "type": "string",
-          "pattern": "^(?:\"([a-zA-Z ]+|Not[;?]A[_=]Brand)\";v=\"[0-9]+\",? ?)*$",
+          "pattern": "^(?:\"([a-zA-Z ]+|Not[;?_]A[_= ]Brand)\";v=\"[0-9]+\",? ?)*$",
           "maxLength": 256
         },
         "sec-ch-ua-platform": { "$ref": "#/$defs/httpHeader" },
