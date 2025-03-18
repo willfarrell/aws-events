@@ -248,9 +248,6 @@
         "cloudfront-viewer-country-region-name": {
           "$ref": "#/$defs/httpHeader"
         },
-        "cookie": {
-          "$ref": "#/$defs/httpCookie"
-        },
         "content-length": { "$ref": "#/$defs/stringInteger" },
         "content-type": {
           "type": "string",
