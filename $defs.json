@@ -319,7 +319,7 @@
         "x-amzn-trace-id": {
           "description": "Root=1-670686af-5a7b8b310c651aef57f5cba3",
           "type": "string",
-          "pattern": "^Root=[0-9]{1}-[0-9a-f]{8}-[0-9a-f]{24}$",
+          "pattern": "^(Self=[0-9a-f-]+;)?Root=[0-9]{1}-[0-9a-f]{8}-[0-9a-f]{24}(;Parent=[0-9a-f]+)?(;Sampled=[0-9]+)?(;Lineage=[0-9a-f:|]+)?$",
           "maxLength": 256
         },
         "x-forwarded-for": {
