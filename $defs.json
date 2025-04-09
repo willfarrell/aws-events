@@ -209,7 +209,7 @@
         "accept": {
           "description": "application/json, text/plain, */*",
           "type": "string",
-          "pattern": "^(?:([*]|[a-z]+)/([*]|[a-z+\\._-]+)(;q=(1|0|0\\.[0-9]{1,3}))?,? ?)*$",
+          "pattern": "^(?:([*]|[a-z]+)/([*]|[a-z+\\._-]+)(;v=[a-z0-9]+)?(;q=(1|0|0\\.[0-9]{1,3}))?,? ?)*$",
           "maxLength": 256
         },
         "accept-encoding": {
