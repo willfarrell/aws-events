@@ -221,7 +221,7 @@
         "accept": {
           "description": "application/json, text/plain, */*",
           "type": "string",
-          "pattern": "^(?:([*]|[a-z]+)/([*]|[a-z+\\._-]+)(;q=(1|0|0\\.[0-9]{1,3}))?,? ?)*$",
+          "pattern": "^(?:([*]|[a-z]+)/([*]|[a-z+\\._-]+)(;v=[a-z0-9]+)?(;q=(1|0|0\\.[0-9]{1,3}))?,? ?)*$",
           "maxLength": 256
         },
         "accept-encoding": {
@@ -331,7 +331,7 @@
         "x-amzn-trace-id": {
           "description": "Root=1-670686af-5a7b8b310c651aef57f5cba3",
           "type": "string",
-          "pattern": "^Root=[0-9]{1}-[0-9a-f]{8}-[0-9a-f]{24}$",
+          "pattern": "^(Self=[0-9a-f-]+;)?Root=[0-9]{1}-[0-9a-f]{8}-[0-9a-f]{24}(;Parent=[0-9a-f]+)?(;Sampled=[0-9]+)?(;Lineage=[0-9a-f:|]+)?$",
           "maxLength": 256
         },
         "x-forwarded-for": {
