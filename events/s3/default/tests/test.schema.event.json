@@ -1,0 +1,15 @@
+[
+	{
+		"description": "data.event.1.json",
+		"schema": {
+			"$ref": "https://schema.aws/s3/default/event"
+		},
+		"tests": [
+			{
+				"description": "Should pass ObjectCreated:Put",
+				"dataFile": "./data.event.1.json",
+				"valid": true
+			}
+		]
+	}
+]

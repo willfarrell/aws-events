@@ -1,0 +1,57 @@
+{
+	"version": "2.0",
+	"routeKey": "GET /api/dataset/organization",
+	"rawPath": "/api/dataset/organization",
+	"rawQueryString": "draft=false&q=test",
+	"headers": {
+		"accept": "application/json, text/plain, */*",
+		"accept-language": "en-US,en;q=0.9",
+		"cache-control": "no-cache",
+		"cloudfront-is-mobile-viewer": "false",
+		"cloudfront-is-smarttv-viewer": "false",
+		"cloudfront-is-tablet-viewer": "false",
+		"cloudfront-viewer-city": "Vancouver",
+		"cloudfront-viewer-country-name": "Canada",
+		"cloudfront-viewer-country-region-name": "Alberta",
+		"content-length": "0",
+		"host": "xx0xxxxxxx.execute-api.ca-central-1.amazonaws.com",
+		"origin": "https://localhost",
+		"pragma": "no-cache",
+		"sec-ch-ua": "\"Chromium\";v=\"128\", \"Not;A=Brand\";v=\"24\", \"Google Chrome\";v=\"128\"",
+		"sec-ch-ua-platform": "\"macOS\"",
+		"user-agent": "Amazon CloudFront",
+		"via": "3.0 ffffffffffffffffffffffffffffffff.cloudfront.net (CloudFront)",
+		"x-amz-cf-id": "0j476N-JDtQabF97n1FPbM1osrDHCYbT3v_pkBvyQUiYh1dMu1pGoQ==",
+		"x-amzn-trace-id": "Root=1-63969999-5a7b8b310c651aef57f5cba3",
+		"x-forwarded-for": "104.205.238.229, 64.252.70.39",
+		"x-forwarded-port": "443",
+		"x-forwarded-proto": "https"
+	},
+	"queryStringParameters": {
+		"draft": "false",
+		"q": "test"
+	},
+	"requestContext": {
+		"accountId": "000000000000",
+		"apiId": "xx0xxxxxxx",
+		"authorizer": {
+			"lambda": {}
+		},
+		"domainName": "xx0xxxxxxx.execute-api.ca-central-1.amazonaws.com",
+		"domainPrefix": "xx0xxxxxxx",
+		"http": {
+			"method": "GET",
+			"path": "/api/dataset/organization",
+			"protocol": "HTTP/1.1",
+			"sourceIp": "199.0.0.202",
+			"userAgent": "Amazon CloudFront"
+		},
+		"requestId": "fYn7Zh_-YosEMkg=",
+		"routeKey": "GET /api/dataset/organization",
+		"stage": "$default",
+		"time": "09/Oct/2024:13:35:43 +0000",
+		"timeEpoch": 1728480943026
+	},
+	"isBase64Encoded": false,
+	"pathParameters": {}
+}

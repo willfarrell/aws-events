@@ -1,0 +1,15 @@
+[
+	{
+		"description": "data.response.200-json.json",
+		"schema": {
+			"$ref": "https://schema.aws/apig/http/response"
+		},
+		"tests": [
+			{
+				"description": "Should pass 200-json",
+				"dataFile": "./data.response.200-json.json",
+				"valid": true
+			}
+		]
+	}
+]

@@ -1,0 +1,314 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schema.aws/apig/http/event",
+	"title": "API Gateway HTTP Event",
+	"description": "",
+	"$defs": {
+		"method": {
+			"$ref": "https://schema.aws/defs#/$defs/httpMethod",
+			"$comment": "GET"
+		},
+		"path": {
+			"$ref": "https://schema.aws/defs#/$defs/httpPath",
+			"$comment": "/path/to/endpoint"
+		},
+		"routeKey": {
+			"$comment": "GET /path/to/endpoint or $default"
+		},
+		"pathParameters": {
+			"type": "object",
+			"unevaluatedProperties": false,
+			"properties": {},
+			"required": []
+		},
+		"headers": {
+			"allOf": [
+				{
+					"$ref": "https://schema.aws/defs#/$defs/httpHeaders"
+				},
+				{
+					"description": "Add in overrides below",
+					"type": "object",
+					"unevaluatedProperties": false,
+					"properties": {
+						"accept": true,
+						"accept-encoding": true,
+						"accept-language": true,
+						"authorization": true,
+						"cache-control": true,
+						"cloudfront-is-mobile-viewer": true,
+						"cloudfront-is-smarttv-viewer": true,
+						"cloudfront-is-tablet-viewer": true,
+						"cloudfront-viewer-city": true,
+						"cloudfront-viewer-country-name": true,
+						"cloudfront-viewer-country-region-name": true,
+						"cookie": true,
+						"content-length": true,
+						"host": true,
+						"if-none-match": true,
+						"origin": true,
+						"pragma": true,
+						"sec-ch-ua": true,
+						"sec-ch-ua-platform": true,
+						"user-agent": true,
+						"via": true,
+						"x-amz-cf-id": true,
+						"x-amz-content-sha256": true,
+						"x-amz-date": true,
+						"x-amz-security-token": true,
+						"x-amz-source-account": true,
+						"x-amz-source-arn": true,
+						"x-amzn-tls-cipher-suite": true,
+						"x-amzn-tls-version": true,
+						"x-amzn-trace-id": true,
+						"x-forwarded-for": true,
+						"x-forwarded-port": true,
+						"x-forwarded-proto": true
+					},
+					"required": [
+						"accept",
+						"user-agent"
+					]
+				}
+			]
+		},
+		"cookies": {
+			"type": "array",
+			"unevaluatedItems": false,
+			"items": {
+				"$ref": "https://schema.aws/defs#/$defs/httpCookie"
+			},
+			"uniqueItems": true,
+			"minItems": 0,
+			"maxItems": 5
+		},
+		"queryStringParameters": {
+			"type": "object",
+			"unevaluatedProperties": true,
+			"patternProperties": {
+				"^[a-z]+$": {
+					"$ref": "https://schema.aws/defs#/$defs/httpQueryStringValue"
+				}
+			},
+			"maxProperties": 32,
+			"required": []
+		},
+		"isBase64Encoded": {
+			"const": false
+		},
+		"body": {
+			"$ref": "https://schema.aws/defs#/$defs/string",
+			"type": "string",
+			"pattern": "^[\\p{L}\\p{N}\\p{P}\\p{M}\\p{S} \\r\\n]+$",
+			"maxLength": 8096
+		},
+		"stage": {
+			"const": "$default"
+		}
+	},
+	"type": "object",
+	"unevaluatedProperties": false,
+	"properties": {
+		"version": {
+			"const": "2.0"
+		},
+		"routeKey": {
+			"$ref": "#/$defs/routeKey"
+		},
+		"rawPath": {
+			"$ref": "#/$defs/path"
+		},
+		"rawQueryString": {
+			"$ref": "https://schema.aws/defs#/$defs/httpQueryString"
+		},
+		"cookies": {
+			"$ref": "#/$defs/cookies"
+		},
+		"headers": {
+			"$ref": "#/$defs/headers"
+		},
+		"requestContext": {
+			"type": "object",
+			"unevaluatedProperties": false,
+			"properties": {
+				"accountId": {
+					"$ref": "https://schema.aws/defs#/$defs/accountId"
+				},
+				"apiId": {
+					"type": "string",
+					"pattern": "^[a-z0-9]+$",
+					"minLength": 2,
+					"maxLength": 32
+				},
+				"authorizer": {
+					"type": "object",
+					"unevaluatedProperties": false,
+					"properties": {
+						"jwt": {
+							"type": "object",
+							"unevaluatedProperties": false,
+							"properties": {
+								"claims": {
+									"$ref": "https://schema.aws/defs#/$defs/objectOfStrings"
+								},
+								"scopes": {
+									"$ref": "https://schema.aws/defs#/$defs/arrayOfString"
+								}
+							},
+							"required": [
+								"claims"
+							]
+						},
+						"iam": {
+							"type": "object",
+							"unevaluatedProperties": false,
+							"properties": {
+								"accessKey": {
+									"$ref": "https://schema.aws/defs#/$defs/authorizerIamAccessKey"
+								},
+								"accountId": {
+									"$ref": "https://schema.aws/defs#/$defs/accountId"
+								},
+								"callerId": {
+									"$ref": "https://schema.aws/defs#/$defs/authorizerIamUserId"
+								},
+								"cognitoIdentity": {
+									"type": [
+										"object",
+										"null"
+									],
+									"unevaluatedProperties": false,
+									"properties": {
+										"amr": {
+											"$ref": "https://schema.aws/defs#/$defs/arrayOfString"
+										},
+										"identityId": {
+											"$ref": "https://schema.aws/defs#/$defs/string"
+										},
+										"identityPoolId": {
+											"$ref": "https://schema.aws/defs#/$defs/string"
+										}
+									},
+									"required": [
+										"amr",
+										"identityId",
+										"identityPoolId"
+									]
+								},
+								"principalOrgId": {
+									"oneOf": [
+										{
+											"$ref": "https://schema.aws/defs#/$defs/accountId"
+										},
+										{
+											"const": ""
+										}
+									]
+								},
+								"userArn": {
+									"$ref": "https://schema.aws/defs#/$defs/arn"
+								},
+								"userId": {
+									"$ref": "https://schema.aws/defs#/$defs/authorizerIamUserId"
+								}
+							},
+							"required": []
+						},
+						"lambda": {
+							"$ref": "https://schema.aws/defs#/$defs/objectOfStrings"
+						}
+					},
+					"required": []
+				},
+				"domainName": {
+					"$ref": "https://schema.aws/defs#/$defs/httpHostname"
+				},
+				"domainPrefix": {
+					"type": "string",
+					"pattern": "^[a-z0-9]+$",
+					"minLength": 2,
+					"maxLength": 32
+				},
+				"http": {
+					"type": "object",
+					"unevaluatedProperties": false,
+					"properties": {
+						"method": {
+							"$ref": "#/$defs/method"
+						},
+						"path": {
+							"$ref": "#/$defs/path"
+						},
+						"protocol": {
+							"$ref": "https://schema.aws/defs#/$defs/httpProtocol"
+						},
+						"sourceIp": {
+							"$ref": "https://schema.aws/defs#/$defs/httpIP"
+						},
+						"userAgent": {
+							"$ref": "https://schema.aws/defs#/$defs/httpHeaders/properties/user-agent"
+						}
+					},
+					"required": [
+						"method",
+						"path",
+						"protocol",
+						"sourceIp",
+						"userAgent"
+					]
+				},
+				"requestId": {
+					"$ref": "https://schema.aws/defs#/$defs/requestId"
+				},
+				"routeKey": {
+					"$ref": "#/$defs/routeKey"
+				},
+				"stage": {
+					"$ref": "#/$defs/stage"
+				},
+				"time": {
+					"$ref": "https://schema.aws/defs#/$defs/stringAWSTimestamp"
+				},
+				"timeEpoch": {
+					"$ref": "https://schema.aws/defs#/$defs/timeEpochInMilliseconds"
+				}
+			},
+			"required": [
+				"accountId",
+				"apiId",
+				"domainName",
+				"domainPrefix",
+				"http",
+				"requestId",
+				"routeKey",
+				"stage",
+				"time",
+				"timeEpoch"
+			]
+		},
+		"isBase64Encoded": {
+			"$ref": "#/$defs/isBase64Encoded"
+		},
+		"body": {
+			"$ref": "#/$defs/body"
+		},
+		"pathParameters": {
+			"$ref": "#/$defs/pathParameters"
+		},
+		"queryStringParameters": {
+			"$ref": "#/$defs/queryStringParameters"
+		},
+		"stageVariables": {
+			"$ref": "#/$defs/stage"
+		}
+	},
+	"required": [
+		"version",
+		"routeKey",
+		"rawPath",
+		"rawQueryString",
+		"headers",
+		"requestContext",
+		"isBase64Encoded"
+	]
+}

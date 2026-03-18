@@ -1,0 +1,229 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schema.aws/sqs/default/event",
+	"title": "SQS Event",
+	"description": "",
+	"$defs": {
+		"body": {
+			"title": "Message Size",
+			"description": "The maximum is 262,144 bytes (256 KiB).",
+			"type": "string",
+			"pattern": "^[\\p{L}\\p{N}\\p{P}\\p{M}\\p{S} \\r\\n]+$",
+			"minLength": 1,
+			"maxLength": 262144
+		}
+	},
+	"type": "object",
+	"unevaluatedProperties": false,
+	"properties": {
+		"Records": {
+			"type": "array",
+			"unevaluatedItems": false,
+			"items": {
+				"type": "object",
+				"unevaluatedProperties": false,
+				"properties": {
+					"messageId": {
+						"$ref": "https://schema.aws/defs#/$defs/stringUUID"
+					},
+					"receiptHandle": {
+						"type": "string",
+						"pattern": "^[0-9a-zA-Z+/]*=*$",
+						"minLength": 1,
+						"maxLength": 512
+					},
+					"body": {
+						"$ref": "#/$defs/body"
+					},
+					"attributes": {
+						"type": "object",
+						"unevaluatedProperties": false,
+						"properties": {
+							"ApproximateReceiveCount": {
+								"type": "integer",
+								"minimum": 0,
+								"maximum": 9007199254740991
+							},
+							"ApproximateFirstReceiveTimestamp": {
+								"$ref": "https://schema.aws/defs#/$defs/timeEpochInMilliseconds"
+							},
+							"MessageDeduplicationId": {
+								"type": "string",
+								"pattern": "^[a-zA-Z0-9\\._-]*$",
+								"maxLength": 128
+							},
+							"MessageGroupId": {
+								"type": "string",
+								"pattern": "^[a-zA-Z0-9_-]*$",
+								"maxLength": 64
+							},
+							"SenderId": {
+								"type": "string",
+								"pattern": "^[A-Z0-9]*(:[a-z-]*)?$",
+								"maxLength": 64
+							},
+							"SentTimestamp": {
+								"$ref": "https://schema.aws/defs#/$defs/timeEpochInMilliseconds"
+							},
+							"SequenceNumber": {},
+							"AWSTraceHeader": {},
+							"DeadLetterQueueSourceArn": {
+								"description": "Undocumented, but used by AWS to support their re-drive functionality in the console",
+								"allOf": [
+									{
+										"$ref": "https://schema.aws/defs#/$defs/arn"
+									},
+									{
+										"type": "string",
+										"pattern": "^arn:aws:sqs:[a-z0-9:/-]*$",
+										"maxLength": 512
+									}
+								]
+							}
+						},
+						"required": [
+							"ApproximateReceiveCount",
+							"ApproximateFirstReceiveTimestamp",
+							"SentTimestamp",
+							"SenderId"
+						]
+					},
+					"messageAttributes": {
+						"oneOf": [
+							{
+								"type": "object",
+								"unevaluatedProperties": false,
+								"properties": {},
+								"required": []
+							},
+							{
+								"type": "object",
+								"unevaluatedProperties": false,
+								"properties": {
+									"dataType": {
+										"const": "string"
+									},
+									"stringValue": {
+										"$ref": "https://schema.aws/defs#/$defs/string"
+									}
+								},
+								"required": [
+									"dataType"
+								]
+							},
+							{
+								"type": "object",
+								"unevaluatedProperties": false,
+								"properties": {
+									"dataType": {
+										"const": "binary"
+									},
+									"binaryValue": {
+										"$ref": "https://schema.aws/defs#/$defs/stringBase64"
+									}
+								},
+								"required": [
+									"dataType"
+								]
+							},
+							{
+								"type": "object",
+								"unevaluatedProperties": false,
+								"properties": {
+									"dataType": {
+										"const": "stringList"
+									},
+									"stringListValues": {
+										"type": "array",
+										"unevaluatedItems": false,
+										"items": {
+											"$ref": "https://schema.aws/defs#/$defs/string"
+										},
+										"uniqueItems": true,
+										"maxItems": 10
+									}
+								},
+								"required": [
+									"dataType"
+								]
+							},
+							{
+								"type": "object",
+								"unevaluatedProperties": false,
+								"properties": {
+									"dataType": {
+										"const": "binaryList"
+									},
+									"binaryListValues": {
+										"type": "array",
+										"unevaluatedItems": false,
+										"items": {
+											"$ref": "https://schema.aws/defs#/$defs/stringBase64"
+										},
+										"uniqueItems": true,
+										"maxItems": 10
+									}
+								},
+								"required": [
+									"dataType"
+								]
+							}
+						]
+					},
+					"md5OfBody": {
+						"type": "string",
+						"pattern": "^[0-9a-f]*$",
+						"maxLength": 32
+					},
+					"md5OfMessageAttributes": {
+						"oneOf": [
+							{
+								"type": "string",
+								"pattern": "^[0-9a-f]*$",
+								"maxLength": 32
+							},
+							{
+								"const": null
+							}
+						]
+					},
+					"eventSource": {
+						"const": "aws:sqs"
+					},
+					"eventSourceARN": {
+						"allOf": [
+							{
+								"$ref": "https://schema.aws/defs#/$defs/arn"
+							},
+							{
+								"type": "string",
+								"pattern": "^arn:aws:sqs:[a-z0-9:/-]*(\\.fifo)?$",
+								"maxLength": 512
+							}
+						]
+					},
+					"awsRegion": {
+						"$ref": "https://schema.aws/defs#/$defs/region"
+					}
+				},
+				"required": [
+					"messageId",
+					"receiptHandle",
+					"body",
+					"attributes",
+					"messageAttributes",
+					"md5OfBody",
+					"eventSource",
+					"eventSourceARN",
+					"awsRegion"
+				]
+			},
+			"uniqueItems": true,
+			"minItems": 1,
+			"maxItems": 10
+		}
+	},
+	"required": [
+		"Records"
+	]
+}

@@ -1,0 +1,44 @@
+{
+	"version": "2.0",
+	"routeKey": "GET /api/health",
+	"rawPath": "/api/health",
+	"rawQueryString": "",
+	"headers": {
+		"accept": "application/vnd.api+json",
+		"accept-language": "fr-FR,fr",
+		"cloudfront-is-mobile-viewer": "false",
+		"cloudfront-is-smarttv-viewer": "false",
+		"cloudfront-is-tablet-viewer": "false",
+		"cloudfront-viewer-city": "Toronto",
+		"cloudfront-viewer-country-name": "Canada",
+		"cloudfront-viewer-country-region-name": "Alberta",
+		"content-length": "0",
+		"host": "xxxxxxxxxx.execute-api.ca-central-1.amazonaws.com",
+		"user-agent": "Amazon CloudFront",
+		"via": "1.1 ffffffffffffffffffffffffffffffff.cloudfront.net (CloudFront)",
+		"x-amz-cf-id": "AAAAAAAAAAAAAAAAAAAAAAFS232MOwxNU0MdzJIo8TTnJ9mGtGVwew==",
+		"x-amzn-trace-id": "Root=1-666c5004-3715ba145d51bc6b6ac87e58",
+		"x-forwarded-for": "198.0.0.202, 3.0.0.10",
+		"x-forwarded-port": "443",
+		"x-forwarded-proto": "https"
+	},
+	"requestContext": {
+		"accountId": "070822334555",
+		"apiId": "xs7tpmjloc",
+		"domainName": "xs7tpmjloc.execute-api.ca-central-1.amazonaws.com",
+		"domainPrefix": "xs7tpmjloc",
+		"http": {
+			"method": "GET",
+			"path": "/api/health",
+			"protocol": "HTTP/1.1",
+			"sourceIp": "179.0.0.202",
+			"userAgent": "Amazon CloudFront"
+		},
+		"requestId": "APFwugxw4osEJ-g=",
+		"routeKey": "GET /api/health",
+		"stage": "$default",
+		"time": "26/Oct/2024:02:12:20 +0000",
+		"timeEpoch": 1729908740226
+	},
+	"isBase64Encoded": false
+}

@@ -1,0 +1,268 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schema.aws/s3/default/event",
+	"title": "S3 Event",
+	"description": "",
+	"$defs": {
+		"eventName": {
+			"type": "string",
+			"enum": [
+				"ObjectCreated:Put",
+				"ObjectCreated:Post",
+				"ObjectCreated:Copy",
+				"ObjectCreated:CompleteMultipartUpload",
+				"ObjectRemoved:Delete",
+				"ObjectRemoved:DeleteMarkerCreated",
+				"ObjectRestore:Post",
+				"ObjectRestore:Completed",
+				"ObjectRestore:Delete",
+				"ReducedRedundancyLostObject",
+				"Replication:OperationFailedReplication",
+				"Replication:OperationNotTracked",
+				"Replication:OperationMissedThreshold",
+				"Replication:OperationReplicatedAfterThreshold",
+				"ObjectTagging:Put",
+				"ObjectTagging:Delete",
+				"ObjectAcl:Put",
+				"LifecycleExpiration:Delete",
+				"LifecycleExpiration:DeleteMarkerCreated",
+				"LifecycleTransition",
+				"IntelligentTiering",
+				"ObjectCreated:*",
+				"ObjectRemoved:*",
+				"ObjectRestore:*"
+			]
+		},
+		"bucketName": {
+			"type": "string",
+			"pattern": "^[a-z0-9][a-z0-9\\.\\-]{1,61}[a-z0-9]$",
+			"minLength": 3,
+			"maxLength": 63
+		},
+		"objectKey": {
+			"type": "string",
+			"pattern": "^[a-z0-9/-]*\\.ext$",
+			"maxLength": 256
+		}
+	},
+	"type": "object",
+	"unevaluatedProperties": false,
+	"properties": {
+		"Records": {
+			"type": "array",
+			"unevaluatedItems": false,
+			"items": {
+				"type": "object",
+				"unevaluatedProperties": false,
+				"properties": {
+					"eventVersion": {
+						"type": "string",
+						"enum": [
+							"2.1",
+							"2.2",
+							"2.3"
+						]
+					},
+					"eventSource": {
+						"const": "aws:s3"
+					},
+					"awsRegion": {
+						"$ref": "https://schema.aws/defs#/$defs/region"
+					},
+					"eventTime": {
+						"$ref": "https://schema.aws/defs#/$defs/stringISOTimestamp"
+					},
+					"eventName": {
+						"$ref": "#/$defs/eventName"
+					},
+					"userIdentity": {
+						"type": "object",
+						"unevaluatedProperties": false,
+						"properties": {
+							"principalId": {
+								"$ref": "https://schema.aws/defs#/$defs/userPrincipalId"
+							}
+						},
+						"required": [
+							"principalId"
+						]
+					},
+					"requestParameters": {
+						"type": "object",
+						"unevaluatedProperties": false,
+						"properties": {
+							"sourceIPAddress": {
+								"$ref": "https://schema.aws/defs#/$defs/httpIP"
+							}
+						},
+						"required": [
+							"sourceIPAddress"
+						]
+					},
+					"responseElements": {
+						"type": "object",
+						"unevaluatedProperties": false,
+						"properties": {
+							"x-amz-request-id": {
+								"type": "string",
+								"pattern": "^[0-9A-Z]*$",
+								"maxLength": 16
+							},
+							"x-amz-id-2": {
+								"$ref": "https://schema.aws/defs#/$defs/stringBase64"
+							}
+						},
+						"required": [
+							"x-amz-request-id",
+							"x-amz-id-2"
+						]
+					},
+					"s3": {
+						"type": "object",
+						"unevaluatedProperties": false,
+						"properties": {
+							"s3SchemaVersion": {
+								"const": "1.0"
+							},
+							"configurationId": {
+								"type": "string",
+								"pattern": "^[a-zA-Z0-9-]*$",
+								"maxLength": 128
+							},
+							"bucket": {
+								"type": "object",
+								"unevaluatedProperties": false,
+								"properties": {
+									"name": {
+										"$ref": "#/$defs/bucketName"
+									},
+									"ownerIdentity": {
+										"type": "object",
+										"unevaluatedProperties": false,
+										"properties": {
+											"principalId": {
+												"$ref": "https://schema.aws/defs#/$defs/ownerPrincipalId"
+											}
+										},
+										"required": [
+											"principalId"
+										]
+									},
+									"arn": {
+										"allOf": [
+											{
+												"$ref": "https://schema.aws/defs#/$defs/arn"
+											},
+											{
+												"type": "string",
+												"pattern": "^arn:aws:s3:[a-z0-9:/-]*$",
+												"maxLength": 512
+											}
+										]
+									}
+								},
+								"required": [
+									"name",
+									"ownerIdentity",
+									"arn"
+								]
+							},
+							"object": {
+								"type": "object",
+								"unevaluatedProperties": false,
+								"properties": {
+									"key": {
+										"$ref": "#/$defs/objectKey"
+									},
+									"urlDecodedKey": {
+										"type": "string",
+										"pattern": "^[\\p{L}\\p{N}\\p{P}\\p{M}\\p{S} ]+$",
+										"maxLength": 256
+									},
+									"size": {
+										"description": "Max size 5TB",
+										"$comment": "not included in Delete event",
+										"type": "integer",
+										"minimum": 0,
+										"maximum": 5497558138880
+									},
+									"eTag": {
+										"type": "string",
+										"pattern": "^[0-9a-f]+(-[0-9]+)?$",
+										"maxLength": 36
+									},
+									"sequencer": {
+										"type": "string",
+										"pattern": "^[0-9A-F]*$",
+										"maxLength": 18
+									},
+									"versionId": {
+										"type": "string",
+										"pattern": "^[a-zA-Z0-9_]*$",
+										"maxLength": 32
+									}
+								},
+								"required": [
+									"key",
+									"sequencer"
+								]
+							}
+						},
+						"required": [
+							"s3SchemaVersion",
+							"configurationId",
+							"bucket",
+							"object"
+						]
+					},
+					"glacierEventData": {
+						"description": "Only for event ObjectRestore:Completed",
+						"type": "object",
+						"unevaluatedProperties": false,
+						"properties": {
+							"restoreEventData": {
+								"type": "object",
+								"unevaluatedProperties": false,
+								"properties": {
+									"lifecycleRestorationExpiryTime": {
+										"$ref": "https://schema.aws/defs#/$defs/stringISOTimestamp"
+									},
+									"lifecycleRestoreStorageClass": {
+										"type": "string",
+										"enum": [
+											"GLACIER",
+											"DEEP_ARCHIVE"
+										]
+									}
+								},
+								"required": [
+									"lifecycleRestorationExpiryTime"
+								]
+							}
+						},
+						"required": [
+							"restoreEventData"
+						]
+					}
+				},
+				"required": [
+					"eventVersion",
+					"eventSource",
+					"awsRegion",
+					"eventTime",
+					"eventName",
+					"userIdentity",
+					"requestParameters",
+					"responseElements",
+					"s3"
+				]
+			},
+			"uniqueItems": true,
+			"minItems": 1,
+			"maxItems": 1
+		}
+	},
+	"required": [
+		"Records"
+	]
+}

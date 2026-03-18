@@ -1,0 +1,20 @@
+{
+	"Records": [
+		{
+			"messageId": "fadb972a-c69f-4f67-9ed5-6634b2018815",
+			"receiptHandle": "AQEBCdbi21+BxFFBOAVfUBckiLlrWzUZ9PvdSX5AAidXc33UsTutRzm2BAxXltal2d8wJcZd9omshEHwDnJ8JSM8XqzDceG3c0DGGhDozoi1Pei8/psDE6L3NJEN8c5zyZEViuJpRrmXSUaAd3H7Syr//f0QQ/KsLnJlFPN+AfMLJqMTBzBzmACQFIEPe0Q9Kg7NVHV/i39ZowU5Z+liPFembwE0pghyKu5Ru2w8goQylHaQBNQn5ICh7EudRNyXLecuu2hgL9lO4mkrmPPJMLKi9o0q1wNT7nn2v9MoD2i4K7n6WuBRN1dfDk5MLicOq5gnOkSVz56QMYzKxLZZoQigeJE3lONyPKvbWyougPjxs5oDeN52jLWEWBfjuED47kY5m5HOeU5xmWSmVLAJXM8tbQ==",
+			"body": "{}",
+			"attributes": {
+				"ApproximateReceiveCount": "30",
+				"SentTimestamp": "1731706322822",
+				"SenderId": "AROARA7KXCBNQPEE7XAQV:test",
+				"ApproximateFirstReceiveTimestamp": "1731706322827"
+			},
+			"messageAttributes": {},
+			"md5OfBody": "3d992a16871e16dbbcd8f66f3115079c",
+			"eventSource": "aws:sqs",
+			"eventSourceARN": "arn:aws:sqs:ca-central-1:000000000000:notify-queue",
+			"awsRegion": "ca-central-1"
+		}
+	]
+}

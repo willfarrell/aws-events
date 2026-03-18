@@ -1,0 +1,56 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schema.aws/apig/http/response",
+	"title": "API Gateway HTTP Response",
+	"description": "",
+	"$defs": {
+		"statusCode": {
+			"$ref": "https://schema.aws/defs#/$defs/httpStatusCode",
+			"type": "integer",
+			"enum": [
+				200
+			]
+		},
+		"headers": {
+			"$ref": "https://schema.aws/defs#/$defs/httpHeaders",
+			"type": "object",
+			"unevaluatedProperties": false,
+			"properties": {
+				"content-type": {
+					"const": "application/json"
+				}
+			},
+			"required": [
+				"content-type"
+			]
+		},
+		"isBase64Encoded": {
+			"const": false
+		},
+		"body": {
+			"$ref": "https://schema.aws/defs#/$defs/string",
+			"type": "string",
+			"pattern": "^[\\p{L}\\p{N}\\p{P} ]*$",
+			"maxLength": 20480
+		}
+	},
+	"type": "object",
+	"unevaluatedProperties": false,
+	"properties": {
+		"statusCode": {
+			"$ref": "#/$defs/statusCode"
+		},
+		"headers": {
+			"$ref": "#/$defs/headers"
+		},
+		"isBase64Encoded": {
+			"$ref": "#/$defs/isBase64Encoded"
+		},
+		"body": {
+			"$ref": "#/$defs/body"
+		}
+	},
+	"required": [
+		"statusCode"
+	]
+}

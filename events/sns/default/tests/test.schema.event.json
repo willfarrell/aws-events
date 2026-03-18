@@ -1,0 +1,15 @@
+[
+	{
+		"description": "data.event.1.json",
+		"schema": {
+			"$ref": "https://schema.aws/sns/default/event"
+		},
+		"tests": [
+			{
+				"description": "Should pass SNS notification",
+				"dataFile": "./data.event.1.json",
+				"valid": true
+			}
+		]
+	}
+]

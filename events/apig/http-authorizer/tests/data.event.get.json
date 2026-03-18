@@ -1,0 +1,40 @@
+{
+	"version": "2.0",
+	"type": "REQUEST",
+	"routeArn": "arn:aws:execute-api:ca-central-1:000000000000:eeeeeeeeee/$default/GET/v1/odata/v4/Metadata",
+	"identitySource": ["APIKEY9"],
+	"routeKey": "GET /v1/odata/v4/Metadata",
+	"rawPath": "/v1/odata/v4/Metadata",
+	"rawQueryString": "$select=DOI&$top=3",
+	"headers": {
+		"content-length": "0",
+		"host": "id.execute-api.ca-central-1.amazonaws.com",
+		"user-agent": "Amazon CloudFront",
+		"via": "1.1 991f3c79c0be0c85399d06f8c2f7c88a.cloudfront.net (CloudFront)",
+		"x-amz-cf-id": "3xrdBG0ba6Fnvn439moSi4vQhTsvf9zLhDFYJyrOKnCxG4mNYfvKfg==",
+		"x-amzn-trace-id": "Root=1-66666666-31231cbf05fd5cbd74626e59",
+		"x-api-key": "APIKEY9",
+		"x-forwarded-for": "198.0.0.202, 64.0.0.7",
+		"x-forwarded-port": "443",
+		"x-forwarded-proto": "https"
+	},
+	"queryStringParameters": { "$select": "DOI", "$top": "3" },
+	"requestContext": {
+		"accountId": "000000000000",
+		"apiId": "id",
+		"domainName": "id.execute-api.ca-central-1.amazonaws.com",
+		"domainPrefix": "id",
+		"http": {
+			"method": "GET",
+			"path": "/v1/odata/v4/Metadata",
+			"protocol": "HTTP/1.1",
+			"sourceIp": "18.0.0.0",
+			"userAgent": "Amazon CloudFront"
+		},
+		"requestId": "APUd-hdjYosEMCA=",
+		"routeKey": "GET /v1/odata/v4/Metadata",
+		"stage": "$default",
+		"time": "26/Oct/2024:03:52:44 +0000",
+		"timeEpoch": 1729914764201
+	}
+}

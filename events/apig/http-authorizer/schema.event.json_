@@ -1,0 +1,98 @@
+{
+  "title": "API Gateway Authorizer",
+  "description": "https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-lambda-authorizer-input.html",
+  "type": "object",
+  "unevaluatedProperties": false,
+  "properties": {
+    "type": { "type": "string", "enum": ["REQUEST"] },
+    "methodArn": {
+      "$ref": "https://schema.aws/defs#/$defs/arn"
+    },
+    "resource": { "type": "string" },
+    "path": { "$ref": "#/$defs/path" },
+    "httpMethod": { "$ref": "#/$defs/httpMethod" },
+    "headers": {
+      "type": "object",
+      "unevaluatedProperties": true,
+      "properties": {},
+      "required": []
+    },
+    "queryStringParameters": {
+      "type": "object",
+      "unevaluatedProperties": true,
+      "properties": {},
+      "required": []
+    },
+    "pathParameters": {
+      "type": "object",
+      "unevaluatedProperties": true,
+      "properties": {},
+      "required": []
+    },
+    "stageVariables": {
+      "type": "object",
+      "unevaluatedProperties": true,
+      "properties": {},
+      "required": []
+    },
+    "requestContext": {
+      "type": "object",
+      "unevaluatedProperties": false,
+      "properties": {
+        "path": { "$ref": "#/$defs/path" },
+        "accountId": { "$ref": "#/$defs/accountId" },
+        "stage": { "type": "string" },
+        "requestId": { "$ref": "#/$defs/requestId" },
+        "identity": {
+          "type": "object",
+          "unevaluatedProperties": false,
+          "properties": {
+            "apiKey": { "type": "string" },
+            "sourceIp": { "type": "string" },
+            "clientCert": {
+              "type": "object",
+              "unevaluatedProperties": false,
+              "properties": {
+                "clientCertPem": { "type": "string" },
+                "subjectDN": { "type": "string" },
+                "issuerDN": { "type": "string" },
+                "serialNumber": { "type": "string" },
+                "validity": {
+                  "type": "object",
+                  "unevaluatedProperties": false,
+                  "properties": {
+                    "notBefore": { "type": "string" },
+                    "notAfter": { "type": "string" }
+                  },
+                  "required": ["notBefore", "notAfter"]
+                }
+              },
+              "required": [
+                "clientCertPem",
+                "subjectDN",
+                "issuerDN",
+                "serialNumber",
+                "validity"
+              ]
+            }
+          },
+          "required": ["apiKey", "sourceIp", "clientCert"]
+        },
+        "resourcePath": { "$ref": "#/$defs/path" },
+        "httpMethod": { "$ref": "#/$defs/httpMethod" },
+        "apiId": { "type": "string" }
+      },
+      "required": [
+        "path",
+        "accountId",
+        "stage",
+        "requestId",
+        "identity",
+        "resourcePath",
+        "httpMethod",
+        "apiId"
+      ]
+    }
+  },
+  "required": ["type", "methodArn", "resource"]
+}

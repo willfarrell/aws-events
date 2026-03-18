@@ -1,0 +1,19 @@
+{
+	"Records": [
+		{
+			"EventVersion": "1.0",
+			"EventSubscriptionArn": "arn:aws:sns:us-east-1:123456789012:my-topic:b298e35e-6992-4e31-8149-53eaf3baedeb",
+			"EventSource": "aws:sns",
+			"Sns": {
+				"SignatureVersion": "1",
+				"Signature": "sNVKCqcXU+MJzN26mvfes31CVqES0HGOU+7VZJeRxmJR20cAIlf2zq5e+KiXiobGqAm4TIa/I+GetIsSHVu3T3tob1LOQImCf2UkKMLiEqO8bdUP/xlo+JwST51/3lqKer9zjvZQbJVC975Y6+7D2Z3vXHI70DPV7ax52FYb/xt+DHwBDhgExsW7ccp5V68jEkXigzrTaxRL/JS3eaPf5l9yL+l6NWFhtgTi8gBBxDKSZ90YopxYxk4v9ZXgJxBYh/xFr7oeq8tAsIVcnA1t19hyQzpVKPZCq8M2E2xww7aq5vgCTdW4ZsnQXNXbSJqwlomI3txRravcydgvKkqmXQ==",
+				"SigningCertUrl": "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-9c6465fa7f48f5cacd23014631ec1136.pem",
+				"MessageId": "4d7bcd43-6521-5015-8dd6-92f9a4e898e4",
+				"Message": "Hello from SNS",
+				"Timestamp": "2024-11-22T17:29:45.691Z",
+				"TopicArn": "arn:aws:sns:us-east-1:123456789012:my-topic",
+				"Type": "Notification"
+			}
+		}
+	]
+}

@@ -1,0 +1,187 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schema.aws/sns/default/event",
+	"title": "SNS Event",
+	"description": "",
+	"$defs": {
+		"Message": {
+			"title": "Message Size",
+			"description": "The maximum is 262,144 bytes (256 KiB).",
+			"type": "string",
+			"pattern": "^[\\p{L}\\p{N}\\p{P}\\p{M}\\p{S} \\r\\n]+$",
+			"minLength": 1,
+			"maxLength": 262144
+		}
+	},
+	"type": "object",
+	"unevaluatedProperties": false,
+	"properties": {
+		"Records": {
+			"type": "array",
+			"unevaluatedItems": false,
+			"items": {
+				"type": "object",
+				"unevaluatedProperties": false,
+				"properties": {
+					"EventVersion": {
+						"const": "1.0"
+					},
+					"EventSubscriptionArn": {
+						"allOf": [
+							{
+								"$ref": "https://schema.aws/defs#/$defs/arn"
+							},
+							{
+								"type": "string",
+								"pattern": "^arn:aws:sns:[a-z0-9:/-]*$",
+								"maxLength": 512
+							}
+						]
+					},
+					"EventSource": {
+						"const": "aws:sns"
+					},
+					"Sns": {
+						"type": "object",
+						"unevaluatedProperties": false,
+						"properties": {
+							"SignatureVersion": {
+								"type": "string",
+								"enum": [
+									"1",
+									"2"
+								]
+							},
+							"Signature": {
+								"type": "string",
+								"pattern": "^[0-9a-zA-Z+/]*=*$",
+								"maxLength": 512
+							},
+							"SigningCertUrl": {
+								"allOf": [
+									{
+										"$ref": "https://schema.aws/defs#/$defs/endpoint"
+									},
+									{
+										"type": "string",
+										"pattern": "^https://sns\\.[a-z0-9-]+\\.amazonaws\\.com/SimpleNotificationService-[0-9a-f]{32}\\.pem$",
+										"maxLength": 10240
+									}
+								]
+							},
+							"SigningCertURL": {
+								"allOf": [
+									{
+										"$ref": "https://schema.aws/defs#/$defs/endpoint"
+									},
+									{
+										"type": "string",
+										"pattern": "^https://sns\\.[a-z0-9-]+\\.amazonaws\\.com/SimpleNotificationService-[0-9a-f]{32}\\.pem$",
+										"maxLength": 10240
+									}
+								]
+							},
+							"MessageId": {
+								"$ref": "https://schema.aws/defs#/$defs/stringUUID"
+							},
+							"Message": {
+								"$ref": "#/$defs/Message"
+							},
+							"MessageAttributes": {
+								"type": "object",
+								"unevaluatedProperties": false,
+								"patternProperties": {
+									"^[0-9a-fA-F]{256}$": {
+										"type": "object",
+										"unevaluatedProperties": false,
+										"properties": {
+											"Type": {
+												"type": "string",
+												"enum": [
+													"String",
+													"Binary"
+												]
+											},
+											"Value": {
+												"$ref": "https://schema.aws/defs#/$defs/string"
+											}
+										},
+										"required": [
+											"Type",
+											"Value"
+										]
+									}
+								},
+								"maxProperties": 10,
+								"required": []
+							},
+							"Subject": {
+								"$ref": "https://schema.aws/defs#/$defs/string"
+							},
+							"Timestamp": {
+								"$ref": "https://schema.aws/defs#/$defs/stringISOTimestamp"
+							},
+							"TopicArn": {
+								"allOf": [
+									{
+										"$ref": "https://schema.aws/defs#/$defs/arn"
+									},
+									{
+										"type": "string",
+										"pattern": "^arn:aws:sns:[a-z0-9:/-]*$",
+										"maxLength": 512
+									}
+								]
+							},
+							"Type": {
+								"const": "Notification"
+							},
+							"UnsubscribeUrl": {
+								"allOf": [
+									{
+										"$ref": "https://schema.aws/defs#/$defs/endpoint"
+									},
+									{
+										"type": "string",
+										"pattern": "^https://sns\\.[a-z0-9-]+\\.amazonaws\\.com/\\?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:[a-z0-9-]+:[0-9]{12}:[a-zA-Z0-9/-]+:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+										"maxLength": 10240
+									}
+								]
+							},
+							"UnsubscribeURL": {
+								"allOf": [
+									{
+										"$ref": "https://schema.aws/defs#/$defs/endpoint"
+									},
+									{
+										"type": "string",
+										"pattern": "^https://sns\\.[a-z0-9-]+\\.amazonaws\\.com/\\?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:[a-z0-9-]+:[0-9]{12}:[a-zA-Z0-9/-]+:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+										"maxLength": 10240
+									}
+								]
+							}
+						},
+						"required": [
+							"TopicArn",
+							"Type",
+							"Message",
+							"MessageId"
+						]
+					}
+				},
+				"required": [
+					"EventVersion",
+					"EventSubscriptionArn",
+					"EventSource",
+					"Sns"
+				]
+			},
+			"uniqueItems": true,
+			"minItems": 1,
+			"maxItems": 10
+		}
+	},
+	"required": [
+		"Records"
+	]
+}

@@ -1,0 +1,28 @@
+[
+	{
+		"description": "data.event.1.json",
+		"schema": {
+			"$ref": "https://schema.aws/sqs/default/event"
+		},
+		"tests": [
+			{
+				"description": "Should pass GET",
+				"dataFile": "./data.event.1.json",
+				"valid": true
+			}
+		]
+	},
+	{
+		"description": "data.event.2.json",
+		"schema": {
+			"$ref": "https://schema.aws/sqs/default/event"
+		},
+		"tests": [
+			{
+				"description": "Should pass GET",
+				"dataFile": "./data.event.2.json",
+				"valid": true
+			}
+		]
+	}
+]

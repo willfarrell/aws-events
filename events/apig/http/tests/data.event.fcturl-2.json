@@ -1,0 +1,77 @@
+{
+	"version": "2.0",
+	"routeKey": "$default",
+	"rawPath": "/api/v3/series/yp",
+	"rawQueryString": "p=f420ad03-11fe-5519-af99-213b6ce4c8b5&l=fd3df166-361c-51c7-b9bd-676d4cdd8d2d&z=0&draft=true",
+	"cookies": [
+		"__Host-sid=G8MHgZDgJXNKpL6Gc0l3NW.QGydOtBYbPw19Q2LWBx%2FdanseYEVvO%2BMOcCP3cx6E8nCoLTvBuJQQ5FVDIo5K7a9"
+	],
+	"headers": {
+		"x-amz-content-sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+		"x-amzn-tls-version": "TLSv1.2",
+		"x-amz-source-account": "070822334555",
+		"x-forwarded-port": "443",
+		"x-amz-security-token": "IQoJb3JpZ2luX2VjEBYaDGNhLWNlbnRyYWwtMSJHMEUCIF4oM3OYlsC1loGWlTTpJV8pTzECeqSK9ExPX9/6mx6NAiEA+JNLBS1dUpE5tXXnDahnn9k1ZWRQEtQyOEWICtQRFgIqvgIIr///////////ARAAGgw4NTYzNjkwNTMxODEiDFz/S3PPacwOM8e84yqSAg3HQYk4JphqDTn0ZB6TjRKxf1zRriGPp/QWB17SY6q1eShdqDDzjw6txn0fMh4ClZBEedhTKw27rFUrZzokLaxiij+WvnVNi9jJufEHL+uxUKyGhnalqJenZ3nVCMipyvBkr5WT3vQli645VPAdevga3ZoZvm9akFk8BB/90FYnfRDywShPGrv1RutJpYqIof647MLGjH79TNIkGC+929vfbB6pdvNodBJW0oim3I17cTHwIRdafwwqrMUpGp5BzEZ13eaOncdFFWb38PiC70lFwJ69FPXNjgB9OyP6ydLNVmK+8Ojj3gR74Dhd9NjfYLhpujjjGhuwkVUeilFu5vvzcRNeG3jA8WFSNNgCVcaUxikwpd3+uQY6jwHJwzLntr8PHaqfxFGD0SdYDBrelTgN2qyzdN2nbLRWjHKxZfzFX0oTJ8u6w6sppij+CCW+M01ycuRmLXUpnxYYBJdQDlPVn7p3f2nRfOeB75dLcHOdOM6iYEic6ddrE4kTLhGR/HA5vpQFjw+D0h8Xu2bqqEL0QaeuSTuU1eAstpsMkoZSBmfejj1OIRQ2Zg==",
+		"via": "1.1 3e2f24f1d3a153797ece2b5ee8de204a.cloudfront.net (CloudFront)",
+		"x-amzn-tls-cipher-suite": "ECDHE-RSA-AES128-GCM-SHA256",
+		"cloudfront-viewer-country-name": "Canada",
+		"host": "cvgn7vcjityqwtalgylnra4tte0kgntv.lambda-url.ca-central-1.on.aws",
+		"cache-control": "no-cache",
+		"cloudfront-viewer-city": "Calgary",
+		"cookie": "__Host-sid=G8MHgZDgJXNKpL6Gc0l3NW.QGydOtBYbPw19Q2LWBx%2FdanseYEVvO%2BMOcCP3cx6E8nCoLTvBuJQQ5FVDIo5K7a9",
+		"x-amz-date": "20241121T233950Z",
+		"x-forwarded-proto": "https",
+		"accept-language": "en-CA",
+		"x-forwarded-for": "198.48.146.202",
+		"pragma": "no-cache",
+		"accept": "application/json",
+		"x-amz-source-arn": "arn:aws:cloudfront::070822334555:distribution/E2M0F77L5HS7MV",
+		"cloudfront-is-smarttv-viewer": "false",
+		"sec-ch-ua": "\"Chromium\";v=\"130\", \"Google Chrome\";v=\"130\", \"Not?A_Brand\";v=\"99\"",
+		"x-amzn-trace-id": "Root=1-673fc4c6-433d55075145b23968c4a698",
+		"cloudfront-is-tablet-viewer": "false",
+		"sec-ch-ua-platform": "\"macOS\"",
+		"cloudfront-viewer-country-region-name": "Alberta",
+		"accept-encoding": "gzip, deflate, br, zstd",
+		"x-amz-cf-id": "QNM5Ujhq6FN4Vv_bqSAXL7a8bcMsNLeNfg3XDB3mVQ220twmEzA4gg==",
+		"user-agent": "Amazon CloudFront",
+		"cloudfront-is-mobile-viewer": "false"
+	},
+	"queryStringParameters": {
+		"p": "f420ad03-11fe-5519-af99-213b6ce4c8b5",
+		"draft": true,
+		"z": 0,
+		"l": "fd3df166-361c-51c7-b9bd-676d4cdd8d2d"
+	},
+	"requestContext": {
+		"accountId": "856369053181",
+		"apiId": "cvgn7vcjityqwtalgylnra4tte0kgntv",
+		"authorizer": {
+			"iam": {
+				"accessKey": "ASIA4OY4SXX6S4RFSHWL",
+				"accountId": "856369053181",
+				"callerId": "AROA4OY4SXX6VEIZRJRCJ:EdgeCredentialsProxy+EdgeHostAuthenticationClient-YVR52-P2",
+				"cognitoIdentity": null,
+				"principalOrgId": "",
+				"userArn": "arn:aws:sts::856369053181:assumed-role/OriginAccessControlRole/EdgeCredentialsProxy+EdgeHostAuthenticationClient-YVR52-P2",
+				"userId": "AROA4OY4SXX6VEIZRJRCJ:EdgeCredentialsProxy+EdgeHostAuthenticationClient-YVR52-P2"
+			}
+		},
+		"domainName": "cvgn7vcjityqwtalgylnra4tte0kgntv.lambda-url.ca-central-1.on.aws",
+		"domainPrefix": "cvgn7vcjityqwtalgylnra4tte0kgntv",
+		"http": {
+			"method": "GET",
+			"path": "/api/v3/series/yp",
+			"protocol": "HTTP/1.1",
+			"sourceIp": "3.172.4.71",
+			"userAgent": "Amazon CloudFront"
+		},
+		"requestId": "a80741ae-6a20-4c60-99d4-3da54ba27950",
+		"routeKey": "$default",
+		"stage": "$default",
+		"time": "21/Nov/2024:23:39:50 +0000",
+		"timeEpoch": 1732232390435
+	},
+	"isBase64Encoded": false,
+	"pathParameters": {}
+}

@@ -1,0 +1,54 @@
+[
+	{
+		"description": "data.event.fcturl-1.json",
+		"schema": {
+			"$ref": "https://schema.aws/apig/http/event"
+		},
+		"tests": [
+			{
+				"description": "Should pass GET",
+				"dataFile": "./data.event.fcturl-1.json",
+				"valid": true
+			}
+		]
+	},
+	{
+		"description": "data.event.fcturl-2.json",
+		"schema": {
+			"$ref": "https://schema.aws/apig/http/event"
+		},
+		"tests": [
+			{
+				"description": "Should pass GET",
+				"dataFile": "./data.event.fcturl-2.json",
+				"valid": true
+			}
+		]
+	},
+	{
+		"description": "data.event.get-1.json",
+		"schema": {
+			"$ref": "https://schema.aws/apig/http/event"
+		},
+		"tests": [
+			{
+				"description": "Should pass GET",
+				"dataFile": "./data.event.get-1.json",
+				"valid": true
+			}
+		]
+	},
+	{
+		"description": "data.event.health.json",
+		"schema": {
+			"$ref": "https://schema.aws/apig/http/event"
+		},
+		"tests": [
+			{
+				"description": "Should pass GET",
+				"dataFile": "./data.event.health.json",
+				"valid": true
+			}
+		]
+	}
+]
