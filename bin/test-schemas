@@ -1,29 +1,36 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-function test {
+exit_code=0
+
+function test_schema {
   schema=${1}
-  echo ${schema}
+  echo "${schema}"
 
-  ajv validate ${schema} --valid --strict true \
-    -r ./\$defs.json \
-     | grep 'schema is invalid'
+  if ajv validate "${schema}" --valid --strict true \
+    -r ./\$defs.json 2>&1 | grep -q 'schema is invalid'; then
+    echo "FAIL: ${schema} is invalid"
+    exit_code=1
+  fi
 
+  ajv sast "${schema}" \
+    -r ./\$defs.json || exit_code=1
 
-  ajv sast ${schema} \
-    -r ./\$defs.json
-
-  node ./bin/test.mjs ${schema}
+  node ./bin/test.mjs "${schema}" || exit_code=1
 }
 
 schema=./\$defs.json
-ajv validate ${schema} --valid \
-  --strict true --coerce-types array --all-errors true --use-defaults empty \
-   | grep 'schema is invalid'
+if ajv validate "${schema}" --valid \
+  --strict true --coerce-types array --all-errors true --use-defaults empty 2>&1 \
+   | grep -q 'schema is invalid'; then
+  echo "FAIL: ${schema} is invalid"
+  exit 1
+fi
 
-ajv sast ${schema}
+ajv sast "${schema}" || exit 1
 
 for file in events/*/*/schema.*.json; do
-  test $file #&
+  test_schema "$file"
 done
 
-wait
+exit ${exit_code}
