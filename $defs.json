@@ -136,12 +136,7 @@
 		},
 		"httpProtocol": {
 			"type": "string",
-			"enum": [
-				"HTTP/1.0",
-				"HTTP/1.1",
-				"HTTP/2.0",
-				"HTTP/3.0"
-			]
+			"enum": ["HTTP/1.0", "HTTP/1.1", "HTTP/2.0", "HTTP/3.0"]
 		},
 		"httpMethod": {
 			"title": "HTTP Request Methods",
@@ -250,9 +245,10 @@
 					"maxLength": 256
 				},
 				"authorization": {
+					"$comment": "RFC 6750 token68 charset: a JWT is three dot-joined base64url segments and a Paseto is v4.public.<payload>, so . _ ~ - are all required; +/= stay for Basic.",
 					"type": "string",
-					"pattern": "^(Bearer|[a-zA-Z0-9-]+) [a-zA-Z0-9+/=]*$",
-					"maxLength": 256
+					"pattern": "^(Bearer|[a-zA-Z0-9-]+) [a-zA-Z0-9+/=\\._~-]*$",
+					"maxLength": 2048
 				},
 				"cache-control": {
 					"type": "string",
@@ -292,9 +288,10 @@
 					"$ref": "#/$defs/httpHostname"
 				},
 				"if-none-match": {
+					"$comment": "RFC 9110 entity-tag: opaque-tag is DQUOTE *etagc DQUOTE where etagc is any VCHAR but DQUOTE, so a digest tag like \"sha256-<hex>\" needs '-' and the rest of the range. W/ prefix allowed: If-None-Match uses weak comparison.",
 					"type": "string",
-					"pattern": "^([*]|(?:\"[a-zA-Z0-9]*\",? ?)*)$",
-					"maxLength": 32
+					"pattern": "^([*]|(?:(?:W/)?\"[\\u0021\\u0023-\\u007E]*\",? ?)*)$",
+					"maxLength": 256
 				},
 				"origin": {
 					"$ref": "#/$defs/httpOrigin"
@@ -351,23 +348,14 @@
 				},
 				"x-amzn-tls-cipher-suite": {
 					"type": "string",
-					"enum": [
-						"ECDHE-RSA-AES128-GCM-SHA256",
-						"TLS_AES_128_GCM_SHA256"
-					]
+					"enum": ["ECDHE-RSA-AES128-GCM-SHA256", "TLS_AES_128_GCM_SHA256"]
 				},
 				"x-amzn-tls-version": {
 					"type": "string",
-					"enum": [
-						"TLSv1.2",
-						"TLSv1.3"
-					]
+					"enum": ["TLSv1.2", "TLSv1.3"]
 				},
 				"x-amzn-trace-id": {
-					"description": "Root=1-670686af-5a7b8b310c651aef57f5cba3",
-					"type": "string",
-					"pattern": "^(Self=[0-9a-f-]+;)?Root=[0-9]{1}-[0-9a-f]{8}-[0-9a-f]{24}(;Parent=[0-9a-f]+)?(;Sampled=[0-9]+)?(;Lineage=[0-9a-f:|]+)?$",
-					"maxLength": 256
+					"$ref": "#/$defs/traceHeader"
 				},
 				"x-forwarded-for": {
 					"description": "0000:aaaa:ffff:0100:5555:dddd:6666:eeee, 255.255.255.255",
@@ -388,67 +376,11 @@
 			"$comment": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Status",
 			"type": "integer",
 			"enum": [
-				100,
-				101,
-				102,
-				103,
-				200,
-				201,
-				202,
-				203,
-				204,
-				205,
-				206,
-				207,
-				208,
-				226,
-				300,
-				301,
-				302,
-				303,
-				304,
-				305,
-				306,
-				307,
-				308,
-				400,
-				401,
-				402,
-				403,
-				404,
-				405,
-				406,
-				407,
-				408,
-				409,
-				410,
-				411,
-				412,
-				413,
-				414,
-				415,
-				416,
-				417,
-				418,
-				421,
-				422,
-				423,
-				424,
-				425,
-				426,
-				428,
-				429,
-				431,
-				451,
-				500,
-				502,
-				503,
-				504,
-				505,
-				506,
-				507,
-				508,
-				511
+				100, 101, 102, 103, 200, 201, 202, 203, 204, 205, 206, 207, 208, 226,
+				300, 301, 302, 303, 304, 305, 306, 307, 308, 400, 401, 402, 403, 404,
+				405, 406, 407, 408, 409, 410, 411, 412, 413, 414, 415, 416, 417, 418,
+				421, 422, 423, 424, 425, 426, 428, 429, 431, 451, 500, 502, 503, 504,
+				505, 506, 507, 508, 511
 			]
 		},
 		"authorizerIamAccessKey": {
@@ -539,10 +471,7 @@
 		},
 		"stringBoolean": {
 			"type": "string",
-			"enum": [
-				"true",
-				"false"
-			]
+			"enum": ["true", "false"]
 		},
 		"stringInteger": {
 			"type": "string",
@@ -586,6 +515,13 @@
 			"pattern": "^[0-9a-f]{64}$",
 			"minLength": 64,
 			"maxLength": 64
+		},
+		"traceHeader": {
+			"$comment": "AWS X-Ray trace header, used as the HTTP X-Amzn-Trace-Id header and the SQS AWSTraceHeader system attribute. The Lineage segment (Lambda recursive-loop detection) contains ':' and '|', so those must be allowed.",
+			"description": "Root=1-670686af-5a7b8b310c651aef57f5cba3;Parent=53995c3f42cd8ad8;Sampled=1;Lineage=1:abcd1234:0",
+			"type": "string",
+			"pattern": "^(Self=[0-9a-f-]+;)?Root=[0-9]{1}-[0-9a-f]{8}-[0-9a-f]{24}(;Parent=[0-9a-f]+)?(;Sampled=[0-9]+)?(;Lineage=[0-9a-f:|]+)?$",
+			"maxLength": 256
 		},
 		"timeEpochInMiliseconds": {
 			"$comment": "Deprecated: use timeEpochInMilliseconds instead",

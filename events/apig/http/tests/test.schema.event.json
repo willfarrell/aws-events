@@ -26,6 +26,45 @@
 		]
 	},
 	{
+		"description": "data.event.conditional-1.json",
+		"schema": {
+			"$ref": "https://schema.aws/apig/http/event"
+		},
+		"tests": [
+			{
+				"description": "Should pass a conditional GET carrying a strong sha256 ETag",
+				"dataFile": "./data.event.conditional-1.json",
+				"valid": true
+			}
+		]
+	},
+	{
+		"description": "data.event.conditional-invalid.json",
+		"schema": {
+			"$ref": "https://schema.aws/apig/http/event"
+		},
+		"tests": [
+			{
+				"description": "Should fail an unquoted ETag: entity-tags stay DQUOTE delimited",
+				"dataFile": "./data.event.conditional-invalid.json",
+				"valid": false
+			}
+		]
+	},
+	{
+		"description": "data.event.oidc-1.json",
+		"schema": {
+			"$ref": "https://schema.aws/apig/http/event"
+		},
+		"tests": [
+			{
+				"description": "Should pass a CI workload OIDC JWT bearer token",
+				"dataFile": "./data.event.oidc-1.json",
+				"valid": true
+			}
+		]
+	},
+	{
 		"description": "data.event.get-1.json",
 		"schema": {
 			"$ref": "https://schema.aws/apig/http/event"

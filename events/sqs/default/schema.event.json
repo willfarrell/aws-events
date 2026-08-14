@@ -65,8 +65,14 @@
 							"SentTimestamp": {
 								"$ref": "https://schema.aws/defs#/$defs/timeEpochInMilliseconds"
 							},
-							"SequenceNumber": {},
-							"AWSTraceHeader": {},
+							"SequenceNumber": {
+								"type": "string",
+								"pattern": "^[0-9]*$",
+								"maxLength": 128
+							},
+							"AWSTraceHeader": {
+								"$ref": "https://schema.aws/defs#/$defs/traceHeader"
+							},
 							"DeadLetterQueueSourceArn": {
 								"description": "Undocumented, but used by AWS to support their re-drive functionality in the console",
 								"allOf": [
