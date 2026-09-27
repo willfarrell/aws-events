@@ -284,6 +284,12 @@
 					"pattern": "^([*]|[a-z]+)/([*]|[a-z+\\._-]+)(; ?charset=[a-zA-Z0-9-]*)?$",
 					"maxLength": 32
 				},
+				"dpop": {
+					"$comment": "RFC 9449 proof of possession: a JWT, so three dot-joined base64url segments. Its header carries the public jwk inline, which is why it needs more room than a bearer token.",
+					"type": "string",
+					"pattern": "^[a-zA-Z0-9_-]+\\.[a-zA-Z0-9_-]+\\.[a-zA-Z0-9_-]+$",
+					"maxLength": 4096
+				},
 				"host": {
 					"$ref": "#/$defs/httpHostname"
 				},

@@ -26,7 +26,10 @@
 		"test:unit": "./bin/test-schemas",
 		"test:types": "which tstyche > /dev/null 2>&1 && tstyche || echo 'tstyche not found, skipping type tests'",
 		"test:sast": "npm run test:sast:license",
-		"test:sast:license": "license-check-and-add check -f license.json"
+		"test:sast:license": "license-check-and-add check -f license.json",
+		"release:tag": "git tag -s -m $npm_package_version $npm_package_version",
+		"release:staged": "npm whoami >/dev/null && npm stage list $(npm pkg get name | tr -d '\"') --json | jq -r '.[] | \"\\(.packageName)@\\(.version) \\(.actor) \\(.shasum)\"'",
+		"release:approve": "npm stage list $(npm pkg get name | tr -d '\"') --json | jq -r --arg v \"$npm_package_version\" '.[] | select(.version == $v) | .id' | xargs -n1 -o npm stage approve"
 	},
 	"keywords": [
 		"AWS",
